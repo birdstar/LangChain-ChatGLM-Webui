@@ -3,8 +3,7 @@ import os
 import gradio as gr
 import nltk
 import sentence_transformers
-from duckduckgo_search import ddg
-from duckduckgo_search.utils import SESSION
+from duckduckgo_search import DDGS
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -35,11 +34,17 @@ for i in llm_model_dict:
 
 def search_web(query):
 
-    SESSION.proxies = {
-        "http": f"socks5h://localhost:7890",
-        "https": f"socks5h://localhost:7890"
+    #SESSION.proxies = {
+    #    "http": f"socks5h://localhost:7890",
+    #    "https": f"socks5h://localhost:7890"
+    #}
+    #results = ddg(query)
+    
+    proxies = {
+        "http": "socks5h://localhost:7890",
+        "https": "socks5h://localhost:7890"
     }
-    results = ddg(query)
+    results = DDGS(proxies=proxies, timeout=20).text(query)
     web_content = ''
     if results:
         for result in results:
