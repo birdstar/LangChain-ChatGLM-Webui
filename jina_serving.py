@@ -220,7 +220,7 @@ def init_model():
         knowladge_based_chat_llm.llm._call("你好")
         return """初始模型已成功加载"""
     except Exception as e:
-
+        print(e)
         return """模型未成功加载，请检查后重新尝试"""
 
 
