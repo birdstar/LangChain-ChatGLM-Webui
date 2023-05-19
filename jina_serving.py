@@ -6,8 +6,8 @@ import nltk
 import qdrant_client
 import sentence_transformers
 import torch
-from duckduckgo_search import ddg
-from duckduckgo_search.utils import SESSION
+from duckduckgo_search import DDGS
+#from duckduckgo_search.utils import SESSION
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import UnstructuredFileLoader
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -36,17 +36,27 @@ init_embedding_model = init_embedding_model
 
 
 def search_web(query):
-
-    SESSION.proxies = {
-        "http": f"socks5h://localhost:7890",
-        "https": f"socks5h://localhost:7890"
+    proxies = {
+        "http": "socks5h://localhost:7890",
+        "https": "socks5h://localhost:7890"
     }
-    results = ddg(query)
+    results = DDGS(proxies=proxies, timeout=20).text(query)
     web_content = ''
     if results:
         for result in results:
             web_content += result['body']
     return web_content
+
+    # SESSION.proxies = {
+    #     "http": f"socks5h://localhost:7890",
+    #     "https": f"socks5h://localhost:7890"
+    # }
+    # results = ddg(query)
+    # web_content = ''
+    # if results:
+    #     for result in results:
+    #         web_content += result['body']
+    # return web_content
 
 
 class KnowledgeBasedChatLLM:
@@ -235,7 +245,7 @@ def vector_store(file_path: str or List[str]):
 
 
 @serving
-def predict(input: str, 
+def predict(input: str,
             use_web: bool, top_k: int, history_len: int, temperature: float,
             top_p: float, history: list):
     if history == None:
