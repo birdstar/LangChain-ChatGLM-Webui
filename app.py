@@ -39,7 +39,7 @@ def search_web(query):
     #    "https": f"socks5h://localhost:7890"
     #}
     #results = ddg(query)
-    
+
     proxies = {
         "http": "socks5h://localhost:7890",
         "https": "socks5h://localhost:7890"
@@ -88,7 +88,7 @@ class KnowledgeBasedChatLLM:
     def init_knowledge_vector_store(self, filepath):
 
         docs = self.load_file(filepath)
-
+        print(docs)
         vector_store = FAISS.from_documents(docs, self.embeddings)
         return vector_store
 
