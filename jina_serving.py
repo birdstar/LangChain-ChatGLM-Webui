@@ -242,7 +242,7 @@ def reinit_model(large_language_model: str, embedding_model: str):
 
 @serving
 def vector_store(file_path: str or List[str]):
-
+    print(0)
     vector_store_state, loaded_files = knowladge_based_chat_llm.init_knowledge_vector_store(
         file_path)
     return vector_store_state
