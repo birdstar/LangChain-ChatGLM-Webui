@@ -91,11 +91,15 @@ class KnowledgeBasedChatLLM:
     def init_knowledge_vector_store(self,
                                     filepath: str or List[str],):
         loaded_files = []
+        print(1)
         if isinstance(filepath, str):
             if not os.path.exists(filepath):
+                print(2)
                 return "路径不存在"
             elif os.path.isfile(filepath):
+                print(3)
                 file = os.path.split(filepath)[-1]
+                print(4)
                 try:
                     docs = self.load_file(filepath)
                     print(f"{file} 已成功加载")
