@@ -246,8 +246,8 @@ def vector_store(file_path: str or List[str]):
     print("0")
     try:
         vector_store_state, loaded_files = knowladge_based_chat_llm.init_knowledge_vector_store(file_path)
-        # return vector_store_state, loaded_files
-        model_status = """vector_store succ!"""
+        return vector_store_state, loaded_files
+        # model_status = """vector_store succ!"""
     except Exception as e:
         print(e)
         model_status = """模型未成功加载，请检查后重新尝试"""
