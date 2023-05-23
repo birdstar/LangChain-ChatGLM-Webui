@@ -95,7 +95,7 @@ class KnowledgeBasedChatLLM:
         if isinstance(filepath, str):
             if not os.path.exists(filepath):
                 print(2)
-                return "路径不存在"
+                return "路径不存在", ""
             elif os.path.isfile(filepath):
                 print(3)
                 file = os.path.split(filepath)[-1]
@@ -107,7 +107,7 @@ class KnowledgeBasedChatLLM:
                 except Exception as e:
                     print(e)
                     print(f"{file} 未能成功加载")
-                    return f"{file} 未能成功加载"
+                    return f"{file} 未能成功加载", ""
             elif os.path.isdir(filepath):
                 docs = []
                 for file in os.listdir(filepath):
