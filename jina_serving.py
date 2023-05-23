@@ -247,7 +247,7 @@ def vector_store(file_path: str):
     # vector_store_state, loaded_files = knowladge_based_chat_llm.init_knowledge_vector_store(
     #     file_path)
     # return vector_store_state
-    return 0
+    return 1
 
 
 @serving
