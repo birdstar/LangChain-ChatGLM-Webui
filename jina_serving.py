@@ -246,7 +246,7 @@ def vector_store(file_path: str or List[str]):
     print("0")
     try:
         vector_store_state, loaded_files = knowladge_based_chat_llm.init_knowledge_vector_store(file_path)
-        return vector_store_state, loaded_files
+        return vector_store_state
         # model_status = """vector_store succ!"""
     except Exception as e:
         print(e)
